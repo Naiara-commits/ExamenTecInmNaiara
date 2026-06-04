@@ -13,52 +13,10 @@ namespace UnityEngine.XR.ARFoundation.Samples
     public class UIManager : MonoBehaviour
     {
         public ARPlaneManager planeManager;
-        public PlaceOnPlane placeOnPlane;
-
-        public TextMeshProUGUI planesCountText;
-        public Button clearButton;
-        public TMP_Dropdown prefabDropdown;
         public Button exitButton;
-
-        public List<GameObject> prefabOptions = new List<GameObject>();
-        
-
-        void Start()
-        {
-            
-
-            prefabDropdown.ClearOptions();
-            var names = new List<string>();
-            foreach (var prefab in prefabOptions)
-                names.Add(prefab.name);
-            prefabDropdown.AddOptions(names);
-
-            //poner el primer prefab al iniciar 
-            if (prefabOptions.Count > 0)
-                placeOnPlane.placedPrefab = prefabOptions[0];
-            prefabDropdown.onValueChanged.AddListener(OnDropdownChanged);
-            clearButton.onClick.AddListener(OnClearPressed);
-            exitButton.onClick.AddListener(ExitPressed);
-        }
-        void Update()
-        {
-            planesCountText.text = $"Planos: {planeManager.trackables.count}";      //Cuenta los planos
-                // no puedes instanciar si hay boton donde apuntas
-            placeOnPlane.inputBlocked = IsPointerOverUI();
-        }
-        void OnDropdownChanged(int index)
-        {
-            if (index >= 0 && index < prefabOptions.Count)
-                placeOnPlane.placedPrefab = prefabOptions[index];
-        }
-        void OnClearPressed()
-        {
-            placeOnPlane.ClearAllObjects();
-        }
-
         void ExitPressed()
         {
-            SceneManager.LoadScene("EscenaInicial");
+            SceneManager.LoadScene("MainMenu");
         }
         bool IsPointerOverUI()      //Función para detectar si estás sobre los botones
         {
@@ -76,7 +34,18 @@ namespace UnityEngine.XR.ARFoundation.Samples
 
             return results.Count > 0;
         }
+        // Start is called once before the first execution of Update after the MonoBehaviour is created
+        void Start()
+        {
+            exitButton.onClick.AddListener(ExitPressed);
 
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 
 }

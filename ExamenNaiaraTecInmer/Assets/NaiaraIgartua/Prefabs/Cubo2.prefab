@@ -122,3 +122,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneIndex: 2
+  cubo1Prefab: {fileID: 682940344428450424, guid: 9401d8cef6cd778449b7ad180e00a25a, type: 3}
+  cubo2Prefab: {fileID: 8245368731419819573}
